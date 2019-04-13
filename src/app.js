@@ -6,6 +6,7 @@ const v1 = require('./routes/v1');
 const passport = require('passport');
 const cors = require('cors');
 const app =express();
+app.use(cors());
 //--------------- DB config -------------------
 mongoose.connect(process.env.MONGO_DB_URL || 'mongodb://localhost:27017/mydbproducts',{
     useNewUrlParser:true,
@@ -19,7 +20,6 @@ mongoose.connection.on('error',(err)=>{
 })
 //--------------- Middlewares -------------------
 app.use(logger('dev'));
-app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(passport.initialize());
